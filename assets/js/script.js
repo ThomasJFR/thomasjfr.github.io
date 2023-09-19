@@ -27,13 +27,15 @@ const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
+
+
 // modal toggle function
-const testimonialsModalFunc = function () {
+const modalFunc = function () {
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
 }
 
-// add click event to all modal items
+/*// add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
 
   testimonialsItem[i].addEventListener("click", function () {
@@ -44,7 +46,21 @@ for (let i = 0; i < testimonialsItem.length; i++) {
     modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
 
     testimonialsModalFunc();
+  });
 
+}*/
+
+// add click event to all portfolio items
+const portfolioItem = document.querySelectorAll("[data-filter-item]")
+for (let i = 0; i < portfolioItem.length; i++) {
+
+  portfolioItem[i].addEventListener("click", function () {
+    //modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
+    //modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
+    modalTitle.innerHTML = "Test"//this.querySelector("[data-testimonials-title]").innerHTML;
+    modalText.innerHTML = "Test text"//this.querySelector("[data-testimonials-text]").innerHTML;
+
+    modalFunc();
   });
 
 }
@@ -54,11 +70,10 @@ modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
 
 
-
 // custom select variables
 const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
+const selectValue = document.querySelector("[data-select-value]");
 const filterBtn = document.querySelectorAll("[data-filter-btn]");
 
 select.addEventListener("click", function () { elementToggleFunc(this); });
@@ -102,7 +117,7 @@ for (let i = 0; i < filterBtn.length; i++) {
   filterBtn[i].addEventListener("click", function () {
 
     let selectedValue = this.innerText.toLowerCase();
-	  //selectValue.innerText = this.innerText;
+selectValue.innerText = this.innerText;
     filterFunc(selectedValue);
 
     lastClickedBtn.classList.remove("active");
@@ -134,18 +149,21 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-
+formBtn.addEventListener("click", function() {	
+	const name = formInputs[0].value
+	const subj = formInputs[1].value
+	const text = formInputs[2].value
+	const URL = `mailto:thomas.joakim@gmail.com?subject=${name},%20${subj}&body=${text}`
+	window.open(URL)
+})
 
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
-
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
+const navigateFunc = function(target) {
+  for (let i = 0; i < pages.length; i++) {
+      if (target.toLowerCase() === pages[i].dataset.page) {
         pages[i].classList.add("active");
         navigationLinks[i].classList.add("active");
         window.scrollTo(0, 0);
@@ -154,6 +172,58 @@ for (let i = 0; i < navigationLinks.length; i++) {
         navigationLinks[i].classList.remove("active");
       }
     }
+}
+  
+const experienceFilterItems = document.querySelectorAll("[data-timeline-item]");
 
+const experienceFilterFunc = function (selectedValue) {
+	let fadeTimer = 1000
+	for (let i = 0; i < experienceFilterItems.length; i++) {
+	if (selectedValue === "all")
+	  experienceFilterItems[i].classList.add("active");
+	else if (experienceFilterItems[i].dataset.category.toLowerCase().includes(selectedValue)) {
+	   //setTimeout(function() {
+	      experienceFilterItems[i].classList.add("active");
+	//}, fadeTimer)
+	fadeTimer += 500
+	} else {
+	experienceFilterItems[i].classList.remove("active");
+	}
+	}
+}
+
+const experienceFilterBtn = document.querySelectorAll("[data-experience-filter-btn]");
+let lastClickedExpBtn = experienceFilterBtn[1];
+
+for (let i = 0; i < filterBtn.length; i++) {
+
+  experienceFilterBtn[i].addEventListener("click", function () {
+
+    let selectedValue = this.innerText.toLowerCase();
+    selectValue.innerText = this.innerText;
+    experienceFilterFunc(selectedValue);
+
+    lastClickedExpBtn.classList.remove("active");
+    this.classList.add("active");
+    lastClickedExpBtn = this;
   });
+
+}
+experienceFilterFunc("mechanical")
+
+
+// add event to all nav link
+for (let i = 0; i < navigationLinks.length; i++) {
+  navigationLinks[i].addEventListener("click", function () {
+	navigateFunc(this.innerHTML.toLowerCase())
+  });
+}
+
+
+const clientFunc = function(category) {
+	navigateFunc("Resume")
+	experienceFilterFunc(category)
+	setTimeout(function() {
+		document.querySelector("[data-experience-anchor]").scrollIntoView();
+	},10);
 }
