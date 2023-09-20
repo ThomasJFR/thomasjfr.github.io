@@ -66,8 +66,8 @@ for (let i = 0; i < portfolioItem.length; i++) {
 }
 
 // add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
+modalCloseBtn.addEventListener("click", modalFunc);
+overlay.addEventListener("click", modalFunc);
 
 
 // custom select variables
@@ -173,7 +173,11 @@ const navigateFunc = function(target) {
       }
     }
 }
-  
+
+document.getElementById("about-resume").addEventListener("click", function() {navigateFunc("Resume")})
+
+document.getElementById("about-portfolio").addEventListener("click", function() {navigateFunc("Portfolio")})
+
 const experienceFilterItems = document.querySelectorAll("[data-timeline-item]");
 
 const experienceFilterFunc = function (selectedValue) {
@@ -219,7 +223,6 @@ for (let i = 0; i < navigationLinks.length; i++) {
   });
 }
 
-
 const clientFunc = function(category) {
 	navigateFunc("Resume")
 	experienceFilterFunc(category)
@@ -227,3 +230,5 @@ const clientFunc = function(category) {
 		document.querySelector("[data-experience-anchor]").scrollIntoView();
 	},10);
 }
+
+
