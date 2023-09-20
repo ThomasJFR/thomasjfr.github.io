@@ -468,7 +468,7 @@
           - testimonials modal
         -->
 
-        <div class="modal-container" data-modal-container>
+        <!--div class="modal-container" data-modal-container>
 
           <div class="overlay" data-overlay></div>
 
@@ -483,30 +483,20 @@
                 <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
               </figure>
 
-              <img src="./assets/images/icon-quote.svg" alt="quote icon">
             </div>
 
             <div class="modal-content">
 
-              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
-
-              <time datetime="2021-06-14">14 June, 2021</time>
+              <h4 class="h4 modal-title" data-modal-title></h4>
 
               <div data-modal-text>
-                <p>
-                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                  lot of experience
-                  and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                  consectetur adipiscing
-                  elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                </p>
               </div>
 
             </div>
 
           </section>
 
-        </div>
+        </div-->
 
       <!--
         - #RESUME
@@ -876,8 +866,40 @@
                   <img src="./assets/images/project-pyeea.png" alt="PyEEA" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">PyEEA (Engineering Economic Analysis Package)</h3>
-
+                <h3 class="project-title" data-project-title>PyEEA (Engineering Economic Analysis) Python Package</h3>
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>https://github.com/ThomasJFR/PyEEA</h4>
+		<div style="display:none" data-project-content>
+			<h5 class="h5 modal-title">Background & Objective</h5>
+			<p>
+			At UBC, I took a fourth-year engineering economics (MECH 431) course. Throughout this course, we routinely
+			performed economic analyses, and the recommended software for doing so was generally Excel. Quite quickly,
+			my classmates and I discovered that Excel, while effective for listing transactions, was cumbersome for
+			performing complex economic analyses, often requiring changes to be manually reflected across several sheets.
+			<br/>
+			The objective of this project was to develop a Python library which would match the simplicity of Excel, while
+			significantly simplifying the work required to perform complex analyses and visualizations.<br/>
+			</p>
+			<h5 class="h5 modal title">Development</h5>
+			<p>
+			Immediately upon beginning, I encountered the first major challenge of the project: How to structure the software package. 
+			There were several possible ways to implement this package, so I began with high-level function design:
+			I designed a variety of function stubs for the core functionality of the library, and showed it to classmates to
+			receive feedback on which was the most intuitive. After selecting my favorite design, I created a UML diagram outlining
+			the design in greater detail. This allowed me to design a class hierarchy.
+			</p>
+			<img width="100%" src="assets/images/pyeea-uml.svg" alt="UML Diagam of PyEEA">
+			<p>
+			After having determined the design for the package, I began implementing the software. The base Project and abstract Cashflow objects
+			were first, as these preceded the rest of the project's functions. I created a Git repository to track my changes, and 
+			hosted the repository on Github. Once I had implemented the abstract base Cashflow class, I easily created specific cashflow types, such as
+			Present, Future, and Annuity cashflows. These could added to a project in a single line of code, with the ability to forecast to any period
+			. (Including infinity - more on this later!) I also used Pandas to generate dataframes to represent the cashflows with ease.
+			<br/>
+			A comparison between the Python code and a typical Excel cashflow spreadsheet reveals the simplicity of PyEEA compared to spreadsheets.
+			</p>
+			<img width="100%" src="assets/images/pyeea-comparison.png" alt="Comparison of PyEEA and Excel">
+			Equally simple is visualizing the cashflows.
+		</div>
                 <p class="project-category">Software</p>
 
               </a>
@@ -1042,28 +1064,17 @@
               <ion-icon name="close-outline"></ion-icon>
             </button>
 
-            <div class="modal-img-wrapper">
+            <!--div class="modal-img-wrapper">
               <figure class="modal-avatar-box">
                 <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
               </figure>
-
-              <img src="./assets/images/icon-quote.svg" alt="quote icon">
-            </div>
+            </div-->
 
             <div class="modal-content">
 
-              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
-
-              <time datetime="2021-06-14">14 June, 2021</time>
-
-              <div data-modal-text>
-                <p>
-                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                  lot of experience
-                  and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                  consectetur adipiscing
-                  elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                </p>
+              <h4 class="h3 modal-title" data-modal-title></h4>
+	      <h5 class="project-subheader" data-modal-subtitle></h5>
+              <div style="overflow: auto; height: 80vh" data-modal-text>
               </div>
 
             </div>

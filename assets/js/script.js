@@ -25,6 +25,7 @@ const overlay = document.querySelector("[data-overlay]");
 // modal variable
 const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
+const modalSubtitle = document.querySelector("[data-modal-subtitle]");
 const modalText = document.querySelector("[data-modal-text]");
 
 
@@ -57,8 +58,9 @@ for (let i = 0; i < portfolioItem.length; i++) {
   portfolioItem[i].addEventListener("click", function () {
     //modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
     //modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = "Test"//this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = "Test text"//this.querySelector("[data-testimonials-text]").innerHTML;
+    modalTitle.innerHTML = this.querySelector("[data-project-title]").innerHTML;
+    modalSubtitle.innerHTML = this.querySelector("[data-project-subtitle]").innerHTML;
+    modalText.innerHTML = this.querySelector("[data-project-content]").innerHTML;
 
     modalFunc();
   });
