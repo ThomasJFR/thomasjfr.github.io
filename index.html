@@ -233,7 +233,7 @@
 
 	    <button class="about-nav-btn" id="about-portfolio">
               <ion-icon name="cog-outline"></ion-icon>
-              <span>See my Portfolio</span>
+              <span>See my Past Projects</span>
             </button>
 	</div>
         <!--
@@ -856,6 +856,125 @@
 
           <ul class="project-list">
 
+	    <!-- CAPSTONE -->
+            <li class="project-item  active" data-filter-item data-category="Mechanical">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+                </figure>
+
+                <h3 class="project-title" data-project-title>Lightly-Space-Rated Pressure Sensor</h3>
+
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>https://github.com/ThomasJFR/PyEEA</h4>
+		<div style="display:none" data-project-content>
+			<br/>
+			<img width="100%" src="assets/images/capstone-poster.png" alt="Capstone Project Poster">
+			<br/>
+			<h5 class="h5 modal-title">Background & Objective</h5>
+			<p>
+			In their final year at UBC, engineering students pariticpate in a Capstone project, a project which takes place with a real
+			company and intends to produce a real product or prototype. The project is meant to engage students in the entire engineering
+			design process, from stakeholder consulation to requirements generation, concept generation to prototyping, and analysis to validation.
+			While teams generally form and choose projects in September, my team formed the April prior, and reached out to a client during the summer.
+			Our client tasked us with developing a pressure sensor for use short-term use aboard a satellite or similar spacecraft. 
+			</p>
+			<br/>
+			<p>
+			The project was intended to address a market gap emerging alongside a revolution in satellite technology. Over the last decade or so,
+			satellites have become much easier to launch, which has given rise to "small-satellites": small, short-mission satellites that can be cheaply
+			produced, launched and iterated upon. For such projects, there is a lack of sensor options. Traditional space-rated sensors generally have 
+			long lead times, high costs, and feature more robustness and mass than is necessary for shorter-term missions. Automotive pressure sensors 
+			are cheaper and more compact - desirable qualities for small-satellite applications - but lack the necessary features for reliable sustained 
+			operation in harsh space environments. The purpose of this project was to design a sensor to bridge the gap between these two mature
+			technologies to supply the emerging small-satellite market.
+			</p>
+			<br/>
+			<h5 class="h5 modal-title">Development</h5>
+			<p>
+			The project spanned the entire design process, and as such, as I had a multitude of roles throughout the project. I will detail some
+			of the most meaningful and challenging experiences.
+			</p>
+			<br/>
+
+			<p>
+			<i> Vibration Analysis </i><br/>
+			A standard requirement of space-rated sensors is the ability to withstand the vibration environment they will be exposed to during launch.
+			These vibration environments are quite extreme, and special care must be taken to identify and resolve any potential vibration-induced failure 
+			modes. I took responsibility for performing the random vibration analysis for the project.
+			<br/><br/>
+			I began by familiarizing myself with relevant theory for vibration analysis, such as interpreting Power Spectral Densities plots and using
+			Laplace transforms to compute stress responses in simple structures. Once I had familiarized myself with the theory, I created a MATLAB
+			script to calculate the vibration response of a simplified version of the sensor, iteratively adding complexity as I was able.
+			<br/><br/>
+			Once I had reached the peak complexity that could be analyzed by manual calculations, I moved on to random vibration simulation.
+			Using SOLIDWORKS, I first recreated the simplified sensor and performed a simulation, whose inputs matched those of the MATLAB script.
+			After corroborating results and determining I was performing the simulations correctly, I performed the simulation on the detailed
+			model of the sensor. Using the results of this analysis, I was able to determine the parameters most influencing the vibration response
+			of the sensor, and identified possible failure paths and modes to be resolved.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/capstone-stress.png" alt="Stress Analysis">
+			<br/>
+
+			<p>
+			<i> Testbench Design </i><br/>
+			One of the key requirements for the second was thermal and baric compensation, for which a second-order compensation scheme was needed.
+			Without compensation, the sensor would produce highly inaccurate readings near its operational limits, which is visualized below.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/capstone-response.png" alt="Output Response">
+			<br/>
+			<p>
+			To enable testing, I constructed a testbench which used a LabJack to collect data. I soldered thermocouple and pressure sensor connections
+			onto perfboards, and connected them to the LabJack. I also added strain reliefs and other mechanical features to the testbench, which prevented 
+			the lead-ends of the connections from being damaged. Once the testbench was constructed, we connected it to various points along a manifold and 
+			collected data at different temperature and pressure points; this data was used to produce a second-order fit for the compensator to use.
+
+			Ultimately, the second-order compensation scheme was mostly succesful, bringing measurement error within project requirements. This could not
+			be validated at lower temperatures, due to formation of ice and a lack of time to resolve this issue.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/capstone-envelope.png" alt="Output Error Envelope">
+			<br/>
+			
+			<p>
+			<i> Harness Design </i><br/>
+			Several pressure transducers were tested throughout the course of this project. One such transducer measured just 9mm in diameter, and required
+			a custom harness to interface with the testbech. I constructed this harness using a set of crimps held in place by a 3D-printed frame. This
+			required carefully designing features on the frame, since the 3D printer was limited in its capacity to produce fine details, and the frame was
+			quite small and weak due to size constraints. The result was a "snowflake-like" frame, which had radial insertion lines and ridges to hold the 
+			crimps in place once inserted.
+			<br/><br/>
+			Finally, wires were soldered to the crimps, and the construction was held together by heat shrink. The harness was succesfully able to interface
+			the sensor with the testbench, allowing for smooth data aquisition to take place.
+			</p>
+			<br/>
+			
+			<h5 class="h5 modal-title">Achievement</h5>
+			<p>
+			Ultimately, the project was highly succesful. Thanks to our combined strong presentation, details-focused design, and effective documentation,
+			our team was awarded the Capstone Project Award among our cohort. I also received a 95% score in the class.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/capstone-team.jpg" alt="Capstone Team Picture">
+			<br/>
+			<p>
+			I learned a great deal of practical and technical skills throughout the project. I learned a great deal about random vibrations, and how
+			to use SOLIDWORKS and hand calculations to analyze them for failure modes. I learned about test bench design and data analysis techniques.
+			I also learned about mechanical design principles which have helped me become a more well-rounded engineer.
+			</p>
+		</div>
+                <p class="project-category">Mechanical</p>
+
+              </a>
+            </li>
+
+	    <!-- PyEEA -->
             <li class="project-item  active" data-filter-item data-category="Software">
               <a href="#">
                 <figure class="project-img">
@@ -879,6 +998,7 @@
 			The objective of this project was to develop a Python library which would match the simplicity of Excel, while
 			significantly simplifying the work required to perform complex analyses and visualizations.<br/>
 			</p>
+			<br/>
 			<h5 class="h5 modal title">Development</h5>
 			<p>
 			Immediately upon beginning, I encountered the first major challenge of the project: How to structure the software package. 
@@ -887,7 +1007,9 @@
 			receive feedback on which was the most intuitive. After selecting my favorite design, I created a UML diagram outlining
 			the design in greater detail. This allowed me to design a class hierarchy.
 			</p>
+			<br/>
 			<img width="100%" src="assets/images/pyeea-uml.svg" alt="UML Diagam of PyEEA">
+			<br/>
 			<p>
 			After having determined the design for the package, I began implementing the software. The base Project and abstract Cashflow objects
 			were first, as these preceded the rest of the project's functions. I created a Git repository to track my changes, and 
@@ -897,32 +1019,53 @@
 			<br/>
 			A comparison between the Python code and a typical Excel cashflow spreadsheet reveals the simplicity of PyEEA compared to spreadsheets.
 			</p>
+			<br/>	
 			<img width="100%" src="assets/images/pyeea-comparison.png" alt="Comparison of PyEEA and Excel">
+			<br/>
+			<p>
 			Equally simple is visualizing the cashflows.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/pyeea-comparison-2.png" alt="Comparison of PyEEA and Excel plots">
+			<p>
+			<br/>
+			The real benefit of the project arises once analyses are considered. Typically in Excel, analysis methods such as simulations or
+			sensitivity analyses require a new spreadsheet to be created, with either manual matching or complex linking to maintain parity
+			between sheets. PyEEA offers a much simpler interface, declarative interface. For example, a sensitivity analysis, which valuates the
+			project based on percent deviations in cashflow values, is performed as shown:
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/pyeea-sensitivity.png" alt="Sensitivity Analysis in PyEEA">
+			<br/>
+			<p>
+			Other key features of the project were the implementation of taxes, depreciation-based tax shields, cashflows of higher complexity
+			(e.g., Perpetuities, Geometric and Gradient Series, Learning Curve models) and ability to output Excel sheets from Project objects.
+			</p>
+			<br/>
+			<h5 class="h5 modal title">Achievement</h5>
+			<p>
+			During the four-month course, I developed this Python package and used it to complete all my class assignments. At the same time, 
+			I began my work term with Novo Nordisk. Thanks to good timing, I conducted my final project for the course in collaboration with 
+			Novo Nordisk. For the project, I performed an economic and feasibility analysis on introducing advanced 3D printing technologies 
+			into the company's sterile part production workflow. I considered a variety of 3D printing technologies, using PyEEA to compare the
+			cost of each to baseline operational costs. Ultimately, I identified a potential use condition for one 3D printing technology that
+			could reduce costs of procuring spare parts by up to 20%, which I presented to my department manager.
+			</p>
+			<br/>
+			<h5 class="h5 modal title">Improvements</h5>
+			<p>
+			I had initially intended to publish the project on PyPi, Python's package indexer. While I did make an initial push of PyEEA to the
+			PyPi test environment (https://test.pypi.org/project/PyEEA/), I ultimately did not have the time to polish the library into a state
+			I would consider worthy of production. If I had more time, and perhaps a business case, I would like the opportunity to dedicate more
+			time to the development of PyEEA.
+			</p>
 		</div>
                 <p class="project-category">Software</p>
 
               </a>
             </li>
 
-            <li class="project-item  active" data-filter-item data-category="Mechanical">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-capstone.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Lightly-Space-Rated Pressure Sensor</h3>
-
-                <p class="project-category">Mechanical</p>
-
-              </a>
-            </li>
-
+	<!--
             <li class="project-item  active" data-filter-item data-category="Mechanical">
               <a href="#">
 
@@ -957,97 +1100,7 @@
                 <p class="project-category">Mechanical</p>
               </a>
             </li>
-
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
-                </figure>
-
-                <h3 class="project-title">DSM.</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">MetaSpark</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Summary</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Task Manager</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Arrival</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
+	-->
           </ul>
 
         </section>
