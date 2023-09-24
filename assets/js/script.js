@@ -119,7 +119,7 @@ for (let i = 0; i < filterBtn.length; i++) {
   filterBtn[i].addEventListener("click", function () {
 
     let selectedValue = this.innerText.toLowerCase();
-selectValue.innerText = this.innerText;
+    selectValue.innerText = this.innerText;
     filterFunc(selectedValue);
 
     lastClickedBtn.classList.remove("active");
@@ -180,7 +180,25 @@ document.getElementById("about-resume").addEventListener("click", function() {na
 
 document.getElementById("about-portfolio").addEventListener("click", function() {navigateFunc("Portfolio")})
 
+// custom select variables
+const expSelect = document.querySelector("[data-experience-select]");
+const expSelectItems = document.querySelectorAll("[data-experience-select-item]");
+const expSelectValue = document.querySelector("[data-experience-select-value]");
+const experienceFilterBtn = document.querySelectorAll("[data-experience-filter-btn]");
 const experienceFilterItems = document.querySelectorAll("[data-timeline-item]");
+expSelect.addEventListener("click", function () { elementToggleFunc(this); });
+
+// add event in all select items
+//
+for (let i = 0; i < expSelectItems.length; i++) {
+    expSelectItems[i].addEventListener("click", function () {
+
+    let selectedValue = this.innerText.toLowerCase();
+    expSelectValue.innerText = this.innerText;
+    elementToggleFunc(expSelect);
+    experienceFilterFunc(selectedValue);
+  });
+}
 
 const experienceFilterFunc = function (selectedValue) {
 	let fadeTimer = 1000
@@ -198,7 +216,6 @@ const experienceFilterFunc = function (selectedValue) {
 	}
 }
 
-const experienceFilterBtn = document.querySelectorAll("[data-experience-filter-btn]");
 let lastClickedExpBtn = experienceFilterBtn[1];
 
 for (let i = 0; i < filterBtn.length; i++) {
