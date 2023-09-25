@@ -582,7 +582,8 @@ main {
 
 .service-icon-box ion-icon {
   color: var(--orange-yellow-crayola);
-  font-size: var(--fs-icon);
+  font-size: 40px;
+  margin: auto;
 }
 
 .service-icon-box img { margin: auto; }
