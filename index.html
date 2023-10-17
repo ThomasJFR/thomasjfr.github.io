@@ -781,7 +781,7 @@
             <li class="skills-item">
 
               <div class="title-wrapper">
-		      <h5 class="h5">Circuit Design <i>(SIMULINK, Fritzing)</i></h5>
+		      <h5 class="h5">Circuit Design <i>(SIMULINK, LTSpice, Fritzing)</i></h5>
                 <data value="70">Strong</data>
               </div>
 
@@ -932,7 +932,7 @@
 			technologies to supply the emerging small-satellite market.
 			</p>
 			<br/>
-			<h5 class="h5 modal-title">Development</h5>
+			<h5 class="h5 modal-title">Development and Challenges</h5>
 			<p>
 			The project spanned the entire design process, and as such, as I had a multitude of roles throughout the project. I will detail some
 			of the most meaningful and challenging experiences.
@@ -999,7 +999,7 @@
 			our team was awarded the Capstone Project Award among our cohort. I also received a 95% score in the class.
 			</p>
 			<br/>
-			<img width="100%" src="assets/images/capstone-team.jpg" alt="Capstone Team Picture">
+			<img width="100%" src="assets/images/capstone-team.png" alt="Capstone Team Picture">
 			<br/>
 			<p>
 			I learned a great deal of practical and technical skills throughout the project. I learned a great deal about random vibrations, and how
@@ -1012,6 +1012,121 @@
               </a>
             </li>
 
+	<!-- DVRK -->
+            <li class="project-item  active" data-filter-item data-category="Mechanical">
+              <a href="#">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/dvrk-robot.png" alt="DV Robot" loading="lazy">
+                </figure>
+
+                <h3 class="project-title" data-project-title>DaVinci Robot Pick & Place Algorithm</h3>
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle><a href="https://media.licdn.com/dms/document/media/D562DAQGlgnSt_njabQ/profile-treasury-document-pdf-analyzed/0/1695668453897?e=1696464000&v=beta&t=AIgT46CLrK9ZsO6Z_VvzINv7T6Z4HpmWVnYvkmFvNI8" target="_blank">See Project Report </a></h4>
+		<div style="display:none" data-project-content>
+			<br/>	
+	  		<img width="100%" src="./assets/images/dvrk-robot.png" alt="DV Robot" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Background & Objective</h5>
+			<p>
+			At UBC, I took a fourth-year industrial robotics course. The final project for the course involved
+			implementing a control algorithm onto a real-world robot. Some friends and I formed a team,
+			and decided to implement a pick-and-place algorithm to be implemented on a Da Vinci Surgical Robot.
+			The algorithm would identify colored objects on a surface using the robot's endoscopic camera and
+			actuate the two robotic arms to collect these items and place them into a designated bucket or
+			drop zone.
+			</p>
+			<br/>
+			<h5 class="h5 modal-title">Development and Challenges</h5>
+			<p>
+			This project presented several challenges. First was the time-limited scope of the project: We were
+			given just a few weeks to complete this project, which featured hardware and software we were largely
+			unfamiliar with. There was the additional challenge of availability: These robots are multi-million
+			dollar machines (Two of the three robots in BC are located in this lab) and so any damage to the robot
+			might prevent us from completing our objective in time. This was especially relevant since we our algorithm
+			would need to use both robot arms simultaneously, which posed the threat of arm collision.
+			<br/><br/>
+			After identifying these risks, we began by designing the control algorithm for the robot.
+			The algorithm would need to combine computer vision and pick-and-place steps. Given the tight time
+			constraints for the project, we limited the scope to performing an open-loop pick-and-place, based 
+			on a single image capture from the endoscope.
+			<br/><br/>
+			Two control layers were specified for the design. The first layer, known as the Patient-Side Manipulator
+			(PSM) Controller, was responsible for driving the individual robot arms. This included requesting items
+			and receptacles from higher control layers, and executing the actions safely. The control algorithm
+			is visualized in the diagram below.
+			</p>
+			<br/>
+	  		<img width="100%" src="./assets/images/dvrk-psmcontroller.png" alt="PSM Controller Diagram" loading="lazy">
+			<br/>
+			<p>
+			The second control layer, known as the Pick-and-Place Controller, managed the PSM Controllers for each
+			arm by implementing control measures such as collision avoidance algorithms. The algorithm is visualized
+			in the diagram below.
+			</p>
+			<br/>
+	  		<img width="100%" src="./assets/images/dvrk-ppcontroller.png" alt="P&P Controller Diagram" loading="lazy">
+			<br/>
+			<p>
+			A Target Dispatcher is also implemented which allows the objects identified by the computer vision
+			algorithm to be dispatched to the most logical PSM for pick-up. This was done by sorting items into
+			a double-ended queue based on an effort function, as visualized below.
+			</p>
+			<br/>
+	  		<img width="100%" src="./assets/images/dvrk-targetdispatcher.png" alt="Target Dispatcher Diagram" loading="lazy">
+			<br/>
+			<p>
+			Trajectories were generated in task space which presented certain challenges. Of primary difficult was the
+			fact that "optimal trajectories" were often not linear, and could result in the arm colliding with the
+			table. To avoid this issue, trajectory executions were conducted at an offset height, and the arm "lowered"
+			onto objects to pick them up. This also eliminated the possbility of objects being knocked about by the
+			manipulators, which could cause the open-loop algorithm to fail.
+			</p>
+			<br/>
+	  		<img width="100%" src="./assets/images/dvrk-zoffset.png" alt="Z-Offset Diagram" loading="lazy">
+			<br/>
+			<p>
+			When it came to testing the algorithms, several measures were taken to avoid causing damage to the robot.
+			Firstly, we began by using simulations to validate our control algorithms. This caused some other issues,
+			however, as we discovered that the origin of each robot was different based on its initial conditions.
+			To remedy this, we implemented a calibration routine, which allowed the robot to have a virtual origin
+			that could be referenced while executing pick-and-place tasks.
+			<br/><br/>
+			Once we began physical tests, we reduced the robot speed to a fraction of its full potential. 
+			This not only greatly reduced the possibility of damage from high-speed collisions, but allowed
+			for a greater timeframe during which an emergency stop could be triggered. Once we were comfortable
+			with the algorithm, we gradually increased speed again.
+			</p>
+			<br/>
+			<h5 class="h5 modal-title">Achievement</h5>
+			<p>
+			Ultimately, our team was successful in implementing and validating the pick-and-place algorithm. The
+			project was presented to the professor and class, and was well-received. I received a 92% score in 
+			the course.
+			</p>
+			<br/>
+			<iframe src="https://drive.google.com/file/d/1Kh6dkcbjgauiwG6Ok0akYQ538ps49kNA/preview" width="100%" allowfullscreen></iframe>
+			<br/>
+			<h5 class="h5 modal-title">Improvements</h5>
+			<p>
+			Though the project was a success, there were certain key limitations of the final product. Most notably,
+			while the CV and Pick-and-Place algorithms were independently verified, some issues arose during final
+			testing which prevented the endoscopic camera from being used, and thus eliminated the possibility of
+			using CV. Thus, the final product has not validated the integration of CV with the Pick-and-Place algorithm.
+			If we had more time to diagnose the endoscopic camera problems, I would have loved to perform the 
+			full system test.
+			<br/><br/>
+			Another issue was trajectory generation, as detailed above. In a future implementation, I would attempt
+			to implement a better trajectory generation scheme using the inverse kinematics of the robot (which are
+			published) which would allow for linear trajectories, or even more complex trajectories which offer more
+			sophisticated collision avoidance.
+			</p>
+		</div>
+                <p class="project-category">Mechanical</p>
+	    </li>
+		
 	    <!-- PyEEA -->
             <li class="project-item  active" data-filter-item data-category="Software">
               <a href="#">
@@ -1040,7 +1155,7 @@
 			significantly simplifying the work required to perform complex analyses and visualizations.<br/>
 			</p>
 			<br/>
-			<h5 class="h5 modal title">Development</h5>
+			<h5 class="h5 modal title">Development and Challenges</h5>
 			<p>
 			Immediately upon beginning, I encountered the first major challenge of the project: How to structure the software package. 
 			There were several possible ways to implement this package, so I began with high-level function design:
@@ -1134,7 +1249,7 @@
 			sun-tracking solar panel, with the potential for scaling up to a panel network, for use in the desert environments of Bahrain.
 			</p>
 			<br/>
-			<h5 class="h5 modal-title">Development</h5>
+			<h5 class="h5 modal-title">Development and Challenges</h5>
 			<p>
 			Hydraulic actuators were selected for actuation of the solar panels, which I was primarily responsible for designing. To do this,
 			I referred to Parker's Hydraulics design guidelines which allowed me to select properly-rated cylinders for the job. Due to the 
@@ -1217,7 +1332,7 @@
 			<br/>
 			<img width="100%" src="./assets/images/covidonate-mission.png" alt="Help fight COVID as a part of your community. Our web app enables you to connect and help covid fighting efforts in your community and other members who have been badly affected by COVID-19." loading="lazy"> 
 			<br/>
-			<h5 class="h5 modal-title">Development</h5>
+			<h5 class="h5 modal-title">Development and Challenges</h5>
 			<p>
 			I was primarily responsible for developing the front-end application using ReactJS. To do this, I created a declarative
 			routing framework for navigating between windows, and developed the various navigable pages. This especially included
