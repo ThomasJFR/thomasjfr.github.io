@@ -1012,8 +1012,331 @@
               </a>
             </li>
 
-	<!-- DVRK -->
+	    <!-- ACB -->
+	    <li class="project-item  active" data-filter-item data-category="Mechanical Software">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/acb-poster-lowres.png" alt="" loading="lazy">
+                </figure>
+
+                <h3 class="project-title" data-project-title>Altitude-Control Balloon</h3>
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle><a href="https://drive.google.com/file/d/1-pxIhR-qbnYj2iOdBWWFcrisgwoGeMbo/view?usp=share_link">Project Presentation, IPPW 2019</a></h4>
+		<div style="display:none" data-project-content>
+			<a href="https://drive.google.com/file/d/1j0Z-VGplHBKpzdz6JKsQ6Ia3U8hAQgpR/view?usp=drive_link" target="_blank">
+				<img width="100%" src="./assets/images/acb-poster.png" alt="Project Poster" loading="lazy">
+				Project Poster, IPPW 2019
+			</a>
+			<br/>
+
+			<h5 class="h5 modal-title">Background & Objective</h5>
+			<p>
+				In 2019, I worked for eight months at Thin Red Line Aerospace. One of the key projects I took part
+				in was the development of an interplanetary probe platform, the "Altitude Control Balloon". 
+				The probe was based on a novel elevation control mechanism, described in the company's patent of
+				the technology (US10196123B2).
+				<!--a href="https://patents.google.com/patent/US10196123B2/en"-->
+				<br/>
+				<img width="100%" src="./assets/images/acb-patent.png" alt="Patent Drawing for the Probe" loading="lazy">
+				<br/>
+				I arrived at the company just a few weeks prior to the 2019 Interplanetary Probe Workshop, where
+				the technology was to be demonstrated: in particular, the company intended to demonstrate a
+				successful flight test. Developing the probe - both to enable the impending flight test, as well as
+				to refine it afterwards - were primary tasks of mine.
+				<br/><br/>
+				In the following sections, I will describe some of the key challenges during the weeks preceding
+				the flight test.
+				<br/><br/>
+				<img width="100%" src="./assets/images/acb-filling.png" alt="Filling the Ballon on the Flight Test Day" loading="lazy">
+			</p>
+			<br/>
+
+			<h5 class="h5 modal title">Development and Challenges</h5>
+			<p>
+				Most of my work concerned the mechatronic systems aboard the probe, which were many and complex.
+				Upon my arrival, I began by identifying the most critical subsystems of the probe, and mapped
+				the relationship of these subsystems using a UML diagram. This allowed me to prioritize development
+				of systems within the limited development period preceding the test flight.
+				<br/>
+				<br/>
+
+				<i> Control Systems </i><br/>
+				Perhaps the most fundamental task for this project was developing an appropriate control system.
+				This task was highly nontrivial, in particular due to the novel control mechanism of the probe.
+				As described in the patent document, a motor is driven to adjust the length of a tension cable.
+				This tension cable runs through an envlope comprising a series of gastight ellipsoidal segments 
+				filled with a lifting gas. Adjusting the length of the tension cable causes the probe's envelope 
+				to compress or expand, depending on which way the motor runs, thus increasing or decreasing the 
+				density of the lifting gas. As the density of the gas changes, so does the average density of the
+				entire probe. Buoyancy dictates that the probe will drive itself to that altitude where its
+				average density is equal to the ambient air density, i.e., the equilibrium altitude of the probe.
+				This is the fundamental control principle of the probe.
+				<br/><br/>
+				Given the novelty of this control mechanism, I could find no corellary control systems on which to 
+				base the ACB's. While an altitude could be achieved by driving the ACB to a certain internal
+				pressure, there would be significant lag in achieving the desired altitude, as the buoyancy effect
+				would diminish while approaching the altitude. Moreover, a knowledge of system characteristics,
+				such as mass and gas density behaviour as a function of motor position, were vital to achieving
+				optimal control.
+				<br/><br/>
+				I approached designing the control systems by first familiarizing myself with relevant control
+				theory, mainly through online resources. Once I was confident in my understanding, I developed a
+				control diagram outlining the control algorithm for the probe, and the way in which it interacted
+				with an operator.
+				<br/><br/>
+				<img width="100%" src="./assets/images/acb-algorithm.png" alt="Flight Computer Algorithm Control Diagram" loading="lazy">
+				<br/><br/>
+				Tuning and testing of the control system represented another significant challenge. The size of
+				the probe, in addition to its flight parameters (namely, the altitude range over which it could 
+				operate), made it impractical to test indoors. To address this challenge, I developed a
+				comprehensive simulation of the balloon, which allowed me to tune the control system prior to
+				field testing. This paid off hugely: A viable control algorithm was developed in simulation, and
+				adjusted during field testing, producing higher-value results during field testing. Moreover, flight
+				data was recorded on-board the probe, allowing for the simulation to be further refined, thus
+				allowing control systems to be more precisely tuned prior to testing.
+			
+				<br/><br/>
+				<i> Communication Systems </i><br/>
+				For the flight test to be considered successful, the probe would need to engage a series of
+				altitudes and trajectories. This was achieved by sending radio commands to the probe from a 
+				ground station. The ground station would also receive real-time flight data from the probe,
+				allowing for the flight to be monitored. A LoRa radio was used to enable bidirectional 
+				communication between the ground station and the probe. LoRa was selected due to its 
+				ultra-long-range capabilities and ease of implementation..
+				<br/><br/>
+				<img width="100%" src="./assets/images/acb-cc.png" alt="Description of Communication and Control systems" loading="lazy">
+				<br/><br/>
+				One key challenge of the communication system involved feedback. Because of the lag in visible
+				response from the probe (as observed from the ground), it was essential to know whether or not 
+				commands were successfully received and acted upon. To achieve this, I extended the base LoRa 
+				protocol to include acknowledgements, similar to common protocols such as TCP/IP. This enabled
+				the ground station to indicate if commands had been received and resend commands otherwise.
+				Overall, the implementation was highly useful during flight testing, where discerning whether or
+				not the probe was executing a new command was practically impossible without feedback.
+				
+				<br/><br/>
+				<i>Mechanical Testing</i><br/>
+				In addition to the key flight test, I conducted a variety of other tests to validate various aspects
+				of the probe. This included pressurizing a representative prototype up to its maximum expected
+				operating pressure (MEOP), testing the mechanical winch which powered altitude control, and
+				evaluating the reliability of various manufacturing processes which were used to construct the 
+				probe.
+			</p>
+			<br/>
+
+			<h5 class="h5 modal title">Achievements</h5>
+			<p>
+				Powered by the control and communication systems I developed, the probe carried out a
+				successful test flight, demonstrating user controllability and impressive flight characteristics.
+				The results of the test, as well as the technology more broadly, were presented at IPPW 2019,
+				where they were very well-received.
+
+				<br/><br/>
+				<img width="100%" src="./assets/images/acb-moneyshot.png" alt="Photograph of Probe During Flight Test" loading="lazy">
+				<br/>
+				<img width="100%" src="./assets/images/acb-interface.png" alt="User Interface During Flight Test" loading="lazy">
+				<br/><br/>
+				This flight test represents an extremely significant milestone in my engineering career. It was the
+				first time I was responsible for a major project deliverable that could have serious ramifications
+				on future prospects for the company. I keenly remember the day of the test flight being
+				simultaneously one of the most exciting and stressful days of my life. The success of the test
+				bolstered my confidence as an engineer and informed some of the electives I took in the final years
+				of my university career. I continue to ruminate on the project to this day, thinking of ways the
+				design could be improved.
+			</p>
+			<br/>
+			<h5 class="h5 modal title">Improvements</h5>
+			<p>
+				When I took on this project, I was still relatively inexperienced as an engineer. Significantly,
+				I lacked a substantial knowledge of modern control theory that would have been appropriately
+				applied to the control problem at hand. While I was able to develop a highly-functional control
+				system, I now have a much stronger understanding of control theory, and would apply an alternative
+				control algorithm to solve the control problem.
+			</p>
+		</div>
+                <p class="project-category">Mechanical / Software</p>
+              </a>
+            </li>
+	
+	    <!-- PyEEA -->
+            <li class="project-item  active" data-filter-item data-category="Software">
+              <a href="#">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img height="100px" src="./assets/images/project-pyeea.png" alt="PyEEA" loading="lazy">
+                </figure>
+
+                <h3 class="project-title" data-project-title>PyEEA (Engineering Economic Analysis) Python Package</h3>
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>https://github.com/ThomasJFR/PyEEA</h4>
+		<div style="display:none" data-project-content>
+
+                  	<img width="100%" src="./assets/images/project-pyeea.png" alt="PyEEA" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Background & Objective</h5>
+			<p>
+			At UBC, I took a fourth-year engineering economics (MECH 431) course. Throughout this course, we routinely
+			performed economic analyses, and the recommended software for doing so was generally Excel. Quite quickly,
+			my classmates and I discovered that Excel, while effective for listing transactions, was cumbersome for
+			performing complex economic analyses, often requiring changes to be manually reflected across several sheets.
+			<br/>
+			The objective of this project was to develop a Python library which would match the simplicity of Excel, while
+			significantly simplifying the work required to perform complex analyses and visualizations.<br/>
+			</p>
+			<br/>
+			<h5 class="h5 modal title">Development and Challenges</h5>
+			<p>
+			Immediately upon beginning, I encountered the first major challenge of the project: How to structure the software package. 
+			There were several possible ways to implement this package, so I began with high-level function design:
+			I designed a variety of function stubs for the core functionality of the library, and showed it to classmates to
+			receive feedback on which was the most intuitive. After selecting my favorite design, I created a UML diagram outlining
+			the design in greater detail. This allowed me to design a class hierarchy.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/pyeea-uml.svg" alt="UML Diagam of PyEEA">
+			<br/>
+			<p>
+			After having determined the design for the package, I began implementing the software. The base Project and abstract Cashflow objects
+			were first, as these preceded the rest of the project's functions. I created a Git repository to track my changes, and 
+			hosted the repository on Github. Once I had implemented the abstract base Cashflow class, I easily created specific cashflow types, such as
+			Present, Future, and Annuity cashflows. These could added to a project in a single line of code, with the ability to forecast to any period
+			. (Including infinity - more on this later!) I also used Pandas to generate dataframes to represent the cashflows with ease.
+			<br/>
+			A comparison between the Python code and a typical Excel cashflow spreadsheet reveals the simplicity of PyEEA compared to spreadsheets.
+			</p>
+			<br/>	
+			<img width="100%" src="assets/images/pyeea-comparison.png" alt="Comparison of PyEEA and Excel">
+			<br/>
+			<p>
+			Equally simple is visualizing the cashflows.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/pyeea-comparison-2.png" alt="Comparison of PyEEA and Excel plots">
+			<p>
+			<br/>
+			The real benefit of the project arises once analyses are considered. Typically in Excel, analysis methods such as simulations or
+			sensitivity analyses require a new spreadsheet to be created, with either manual matching or complex linking to maintain parity
+			between sheets. PyEEA offers a much simpler interface, declarative interface. For example, a sensitivity analysis, which valuates the
+			project based on percent deviations in cashflow values, is performed as shown:
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/pyeea-sensitivity.png" alt="Sensitivity Analysis in PyEEA">
+			<br/>
+			<p>
+			Other key features of the project were the implementation of taxes, depreciation-based tax shields, cashflows of higher complexity
+			(e.g., Perpetuities, Geometric and Gradient Series, Learning Curve models) and ability to output Excel sheets from Project objects.
+			</p>
+			<br/>
+			<h5 class="h5 modal title">Achievement</h5>
+			<p>
+			During the four-month course, I developed this Python package and used it to complete all my class assignments. At the same time, 
+			I began my work term with Novo Nordisk. Thanks to good timing, I conducted my final project for the course in collaboration with 
+			Novo Nordisk. For the project, I performed an economic and feasibility analysis on introducing advanced 3D printing technologies 
+			into the company's sterile part production workflow. I considered a variety of 3D printing technologies, using PyEEA to compare the
+			cost of each to baseline operational costs. Ultimately, I identified a potential use condition for one 3D printing technology that
+			could reduce costs of procuring spare parts by up to 20%, which I presented to my department manager.
+			</p>
+			<br/>
+			<h5 class="h5 modal title">Improvements</h5>
+			<p>
+			I had initially intended to publish the project on PyPi, Python's package indexer. While I did make an initial push of PyEEA to the
+			PyPi test environment (https://test.pypi.org/project/PyEEA/), I ultimately did not have the time to polish the library into a state
+			I would consider worthy of production. If I had more time, and perhaps a business case, I would like the opportunity to dedicate more
+			time to the development of PyEEA.
+			</p>
+		</div>
+                <p class="project-category">Software</p>
+
+              </a>
+            </li>
+
+	   	    <!-- SOLAR PANEL PROJECT -->
             <li class="project-item  active" data-filter-item data-category="Mechanical">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/solarpanel-sketch.png" alt="Sun-Tracking Solar Panel" loading="lazy">
+                </figure>
+
+                <h3 class="project-title" data-project-title>Sun-Tracking Solar Panel</h3>
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>
+			<a class="project-subtitle" style="text-decoration: underline" target="_blank" href="https://media.licdn.com/dms/document/media/C562DAQEmhGnFPM8FLg/profile-treasury-document-pdf-analyzed/0/1639874907945?e=1696464000&v=beta&t=vvAyynO8PphYBkBQMoUtu1Mebn8CDeP6bZAu6vEj6vE">Read the Project Report</a></h4>
+		<div style="display:none" data-project-content>
+                  	<img width="100%" src="./assets/images/solarpanel-sketch.png" alt="Sun-Following Solar Panel" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Background & Objective</h5>
+			<p>
+			At UBC, I took a third-year machine design (MECH 325) course, where I learned how to select machine components based on
+			operational parameters of machines. Throughout the course, I learned how to use selection manuals and textbooks, such as
+			Parker's Hydraulic Cylinder catalogue, and Mott's and Shigley's Machine Design textbooks. For a final project, we were tasked
+			with developing a machine using the principles we learned in the classroom.
+			<br/><br/>
+			My team and I got in contact with Pavillion Renewables, a Bahrain-based renewables firm, who sponsored us in designing a 
+			sun-tracking solar panel, with the potential for scaling up to a panel network, for use in the desert environments of Bahrain.
+			</p>
+			<br/>
+			<h5 class="h5 modal-title">Development and Challenges</h5>
+			<p>
+			Hydraulic actuators were selected for actuation of the solar panels, which I was primarily responsible for designing. To do this,
+			I referred to Parker's Hydraulics design guidelines which allowed me to select properly-rated cylinders for the job. Due to the 
+			high potential wind loading that the panel would experience, in addition to the sheer weight of the panel, the cylinder would
+			need to be able to support significant load. Based on the forces and (low) speed requirements for the solar panel, I selected a 
+			PH 2HX Cylinder, which achieved a safety factor of four based on operational requirements.
+			</p>
+			<br/>
+			  <img width="100%" src="./assets/images/solarpanel-forces.png" alt="Solar Panel Forces" loading="lazy">
+			<br/>
+			<p>
+			In addition to the above, I also specified some additional features for the hydraulic cylinder to accomodate the desert environment,
+			such as PTFE wiper bushings to prevent sand and grit from entering the hydrualic chamber.
+			</p>
+			<br/>
+		 	<p>
+			Once the hydraulic cylinder had been specified, I then designed the pump network, which was needed to achieve the client's vision of 
+			a networked series of solar panels. Based on customer specification of ten solar panels, This allowed for a centralized system and 
+			fewer machine components overall. This setup is visualized below.
+			</p>
+			<br/>
+			  <img width="100%" src="./assets/images/solarpanel-network.png" alt="Solar Panel Network" loading="lazy">
+			<br/>
+			<p>
+			I again referred to Parker Hyrdaulics guidelines to select the pump, motor, tank, piping and hosing necessary to create the network.
+			The connection of these components is shown in the circuit below.
+			</p>
+			<br/>
+			  <img width="100%" src="./assets/images/solarpanel-circuit.png" alt="Solar Panel Circuit" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Achievement</h5>
+			<p>
+			At the end of the year, the project was presented to the professor and classmates. It received positive reviews, with the professor
+			suggesting that the project could be considered for a Capstone project (i.e undegraduate final project).
+			</p>
+			<br/>
+			<h5 class="h5 modal-title">Improvements</h5>
+			<p>
+			While it was exciting to design this solar panel, the design was purely theoretical. Had we had more time, or perhaps chosen 
+			to pursue this project as a capstone project, I would have liked to try building the mechanism, especially the integration and validation
+			of hydraulic cylinders. Still, I believe my experience in this project has prepared me to specify and integrate hydraulic cylinders in
+			a future project.
+			</p>
+		</div>
+                <p class="project-category">Mechanical</p>
+
+              </a>
+            </li>
+	 
+	    <!-- DVRK -->
+            <li class="project-item  active" data-filter-item data-category="Mechanical Software">
               <a href="#">
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -1124,104 +1447,11 @@
 			sophisticated collision avoidance.
 			</p>
 		</div>
-                <p class="project-category">Mechanical</p>
+                <p class="project-category">Mechanical / Software</p>
 	    </li>
-		
-	    <!-- PyEEA -->
-            <li class="project-item  active" data-filter-item data-category="Software">
-              <a href="#">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
 
-                  <img height="100px" src="./assets/images/project-pyeea.png" alt="PyEEA" loading="lazy">
-                </figure>
-
-                <h3 class="project-title" data-project-title>PyEEA (Engineering Economic Analysis) Python Package</h3>
-		<h4 style="display: none" class="project-subtitle" data-project-subtitle>https://github.com/ThomasJFR/PyEEA</h4>
-		<div style="display:none" data-project-content>
-
-                  	<img width="100%" src="./assets/images/project-pyeea.png" alt="PyEEA" loading="lazy">
-			<br/>
-			<h5 class="h5 modal-title">Background & Objective</h5>
-			<p>
-			At UBC, I took a fourth-year engineering economics (MECH 431) course. Throughout this course, we routinely
-			performed economic analyses, and the recommended software for doing so was generally Excel. Quite quickly,
-			my classmates and I discovered that Excel, while effective for listing transactions, was cumbersome for
-			performing complex economic analyses, often requiring changes to be manually reflected across several sheets.
-			<br/>
-			The objective of this project was to develop a Python library which would match the simplicity of Excel, while
-			significantly simplifying the work required to perform complex analyses and visualizations.<br/>
-			</p>
-			<br/>
-			<h5 class="h5 modal title">Development and Challenges</h5>
-			<p>
-			Immediately upon beginning, I encountered the first major challenge of the project: How to structure the software package. 
-			There were several possible ways to implement this package, so I began with high-level function design:
-			I designed a variety of function stubs for the core functionality of the library, and showed it to classmates to
-			receive feedback on which was the most intuitive. After selecting my favorite design, I created a UML diagram outlining
-			the design in greater detail. This allowed me to design a class hierarchy.
-			</p>
-			<br/>
-			<img width="100%" src="assets/images/pyeea-uml.svg" alt="UML Diagam of PyEEA">
-			<br/>
-			<p>
-			After having determined the design for the package, I began implementing the software. The base Project and abstract Cashflow objects
-			were first, as these preceded the rest of the project's functions. I created a Git repository to track my changes, and 
-			hosted the repository on Github. Once I had implemented the abstract base Cashflow class, I easily created specific cashflow types, such as
-			Present, Future, and Annuity cashflows. These could added to a project in a single line of code, with the ability to forecast to any period
-			. (Including infinity - more on this later!) I also used Pandas to generate dataframes to represent the cashflows with ease.
-			<br/>
-			A comparison between the Python code and a typical Excel cashflow spreadsheet reveals the simplicity of PyEEA compared to spreadsheets.
-			</p>
-			<br/>	
-			<img width="100%" src="assets/images/pyeea-comparison.png" alt="Comparison of PyEEA and Excel">
-			<br/>
-			<p>
-			Equally simple is visualizing the cashflows.
-			</p>
-			<br/>
-			<img width="100%" src="assets/images/pyeea-comparison-2.png" alt="Comparison of PyEEA and Excel plots">
-			<p>
-			<br/>
-			The real benefit of the project arises once analyses are considered. Typically in Excel, analysis methods such as simulations or
-			sensitivity analyses require a new spreadsheet to be created, with either manual matching or complex linking to maintain parity
-			between sheets. PyEEA offers a much simpler interface, declarative interface. For example, a sensitivity analysis, which valuates the
-			project based on percent deviations in cashflow values, is performed as shown:
-			</p>
-			<br/>
-			<img width="100%" src="assets/images/pyeea-sensitivity.png" alt="Sensitivity Analysis in PyEEA">
-			<br/>
-			<p>
-			Other key features of the project were the implementation of taxes, depreciation-based tax shields, cashflows of higher complexity
-			(e.g., Perpetuities, Geometric and Gradient Series, Learning Curve models) and ability to output Excel sheets from Project objects.
-			</p>
-			<br/>
-			<h5 class="h5 modal title">Achievement</h5>
-			<p>
-			During the four-month course, I developed this Python package and used it to complete all my class assignments. At the same time, 
-			I began my work term with Novo Nordisk. Thanks to good timing, I conducted my final project for the course in collaboration with 
-			Novo Nordisk. For the project, I performed an economic and feasibility analysis on introducing advanced 3D printing technologies 
-			into the company's sterile part production workflow. I considered a variety of 3D printing technologies, using PyEEA to compare the
-			cost of each to baseline operational costs. Ultimately, I identified a potential use condition for one 3D printing technology that
-			could reduce costs of procuring spare parts by up to 20%, which I presented to my department manager.
-			</p>
-			<br/>
-			<h5 class="h5 modal title">Improvements</h5>
-			<p>
-			I had initially intended to publish the project on PyPi, Python's package indexer. While I did make an initial push of PyEEA to the
-			PyPi test environment (https://test.pypi.org/project/PyEEA/), I ultimately did not have the time to polish the library into a state
-			I would consider worthy of production. If I had more time, and perhaps a business case, I would like the opportunity to dedicate more
-			time to the development of PyEEA.
-			</p>
-		</div>
-                <p class="project-category">Software</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="Mechanical">
+	    <!-- OCEAN WORLDS PROJECT
+	    <li class="project-item  active" data-filter-item data-category="Mechanical">
               <a href="#">
 
                 <figure class="project-img">
@@ -1229,76 +1459,22 @@
                     <ion-icon name="eye-outline"></ion-icon>
                   </div>
 
-                  <img src="./assets/images/solarpanel-sketch.png" alt="Sun-Following Solar Panel" loading="lazy">
+                  <img src="./assets/images/covidonate.png" alt="" loading="lazy">
                 </figure>
 
-                <h3 class="project-title" data-project-title>Sun-Following Solar Panel</h3>
+                <h3 class="project-title" data-project-title>Ocean Worlds Tire</h3>
 		<h4 style="display: none" class="project-subtitle" data-project-subtitle>
-			<a class="project-subtitle" style="text-decoration: underline" target="_blank" href="https://media.licdn.com/dms/document/media/C562DAQEmhGnFPM8FLg/profile-treasury-document-pdf-analyzed/0/1639874907945?e=1696464000&v=beta&t=vvAyynO8PphYBkBQMoUtu1Mebn8CDeP6bZAu6vEj6vE">Read the Project Report</a></h4>
+			<a class="project-subtitle" target="_blank" href="https://devpost.com/software/covidonate-gy1cxw">https://devpost.com/software/covidonate-gy1cxw</a></h4>
 		<div style="display:none" data-project-content>
-                  	<img width="100%" src="./assets/images/solarpanel-sketch.png" alt="Sun-Following Solar Panel" loading="lazy">
-			<br/>
-			<h5 class="h5 modal-title">Background & Objective</h5>
-			<p>
-			At UBC, I took a third-year machine design (MECH 325) course, where I learned how to select machine components based on
-			operational parameters of machines. Throughout the course, I learned how to use selection manuals and textbooks, such as
-			Parker's Hydraulic Cylinder catalogue, and Mott's and Shigley's Machine Design textbooks. For a final project, we were tasked
-			with developing a machine using the principles we learned in the classroom.
-			<br/><br/>
-			My team and I got in contact with Pavillion Renewables, a Bahrain-based renewables firm, who sponsored us in designing a 
-			sun-tracking solar panel, with the potential for scaling up to a panel network, for use in the desert environments of Bahrain.
-			</p>
-			<br/>
-			<h5 class="h5 modal-title">Development and Challenges</h5>
-			<p>
-			Hydraulic actuators were selected for actuation of the solar panels, which I was primarily responsible for designing. To do this,
-			I referred to Parker's Hydraulics design guidelines which allowed me to select properly-rated cylinders for the job. Due to the 
-			high potential wind loading that the panel would experience, in addition to the sheer weight of the panel, the cylinder would
-			need to be able to support significant load. Based on the forces and (low) speed requirements for the solar panel, I selected a 
-			PH 2HX Cylinder, which achieved a safety factor of four based on operational requirements.
-			</p>
-			<br/>
-			  <img width="100%" src="./assets/images/solarpanel-forces.png" alt="Solar Panel Forces" loading="lazy">
-			<br/>
-			<p>
-			In addition to the above, I also specified some additional features for the hydraulic cylinder to accomodate the desert environment,
-			such as PTFE wiper bushings to prevent sand and grit from entering the hydrualic chamber.
-			</p>
-			<br/>
-		 	<p>
-			Once the hydraulic cylinder had been specified, I then designed the pump network, which was needed to achieve the client's vision of 
-			a networked series of solar panels. Based on customer specification of ten solar panels, This allowed for a centralized system and 
-			fewer machine components overall. This setup is visualized below.
-			</p>
-			<br/>
-			  <img width="100%" src="./assets/images/solarpanel-network.png" alt="Solar Panel Network" loading="lazy">
-			<br/>
-			<p>
-			I again referred to Parker Hyrdaulics guidelines to select the pump, motor, tank, piping and hosing necessary to create the network.
-			The connection of these components is shown in the circuit below.
-			</p>
-			<br/>
-			  <img width="100%" src="./assets/images/solarpanel-circuit.png" alt="Solar Panel Circuit" loading="lazy">
-			<br/>
-			<h5 class="h5 modal-title">Achievement</h5>
-			<p>
-			At the end of the year, the project was presented to the professor and classmates. It received positive reviews, with the professor
-			suggesting that the project could be considered for a Capstone project (i.e undegraduate final project).
-			</p>
-			<br/>
-			<h5 class="h5 modal-title">Improvements</h5>
-			<p>
-			While it was exciting to design this solar panel, the design was purely theoretical. Had we had more time, or perhaps chosen 
-			to pursue this project as a capstone project, I would have liked to try building the mechanism, especially the integration and validation
-			of hydraulic cylinders. Still, I believe my experience in this project has prepared me to specify and integrate hydraulic cylinders in
-			a future project.
-			</p>
+                  	<img width="100%" src="./assets/images/covidonate.png" alt="COVIDONATE Website" loading="lazy">
 		</div>
-                <p class="project-category">Mechanical</p>
-
+                
+		<p class="project-category">Mechanical</p>
               </a>
-            </li>
-	
+            </li-->
+
+		
+	    <!-- COVIDONATE -->
 	    <li class="project-item  active" data-filter-item data-category="Software">
               <a href="#">
 
@@ -1319,7 +1495,7 @@
 			<h5 class="h5 modal-title">Background & Objective</h5>
 			<p>
 			In 2020, some friends and I decided to form a team to participate in RookieHacks,
-			a hackathon based around learning a new programming language or framework. The hackathon took place just a few months
+			a hackathon based around learn
 			after the arrival of the COVID-19 pandemic, and was part of the surge of online hackathons that took place in its wake,
 			We saw the hackathon as a great opportunity to learn some new frameworks (we ended up learning ReactJS and MongoDB), and
 			of course, we hoped for a chance to win one of the first-place prizes!
