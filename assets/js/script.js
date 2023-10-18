@@ -28,12 +28,17 @@ const modalTitle = document.querySelector("[data-modal-title]");
 const modalSubtitle = document.querySelector("[data-modal-subtitle]");
 const modalText = document.querySelector("[data-modal-text]");
 
-
-
 // modal toggle function
+var lastModalTitle = "";
 const modalFunc = function () {
   modalContainer.classList.toggle("active");
   overlay.classList.toggle("active");
+  
+  if (modalTitle.textContent !== lastModalTitle) {
+	console.log("Update:" + modalTitle)
+	modalText.scrollTop = 0
+   	lastModalTitle = modalTitle.textContent
+  }
 }
 
 /*// add click event to all modal items
