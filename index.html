@@ -1595,6 +1595,71 @@
                 <p class="project-category">Software</p>
               </a>
             </li>
+
+	    <!-- Dodgems -->
+	    <li class="project-item  active" data-filter-item data-category="Software">
+              <a href="#">
+
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img src="./assets/images/dodgems.png" alt="" loading="lazy">
+                </figure>
+
+                <h3 class="project-title" data-project-title>Dodgems</h3>
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>
+			<a class="project-subtitle" target="_blank" href="https://github.com/ThomasJFR/dodgems">https://github.com/ThomasJFR/dodgems</a></h4>
+		<div style="display:none" data-project-content>
+                  	<img width="100%" src="./assets/images/dodgems.png" alt="Dodgems Screenshot" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Background & Objective</h5>
+			<p>
+				Dodgems was a quick game I developed while trying to familiarize myself with the PyGame library.
+				I wanted to create a skill-testing game that would be fun to test, while allowing me to implement a
+				bunch of features I was interested in.
+			</p>
+			<br/>
+			<h5 class="h5 modal-title">Development and Challenges</h5>
+			<p>
+				The game is rather simple in nature, and (in my opinion) highly addictive. The user controls a
+				sprite (MegaMan) by teleporting him to one side of the window. The position is determined by
+				crosshairs, which move up and down the screen, while the player stays put. The player teleports by
+				pressing the appropriate arrow key.
+				<br/><br/>
+				The game begins with a single enemy (Thwomp) moving across the screen, bouncing against the window
+				borders. Every few seconds, another enemy spawns, moving in a new direction. Each thwomp moves in
+				a random direction with a random speed. Once a thwomp collides with the player, the game ends.
+				The longer the player survives, the more points he earns.
+			</p>
+			<br/>
+			<video width=100% controls>
+				<source src="./assets/images/dodgems-gameplay.mp4" type="video/mp4">
+				Your browser does not support the video.
+			</video>
+			<br/>
+			<br/>	
+			<h5 class="h5 modal-title">Achievement & Improvements</h5>
+			<p>
+				I was able to implement the game above, and had some friends playtest it. They thought it was
+				quite fun - even if they did die pretty quickly. :-)
+				<br/><br/>
+				At present, the game still has many bugs. The enemies despawn, but their hitboxes do not, so
+				there becomes an "invisible kill zone" for the subsequent games. While the added challenge
+				may be appreciated by some, this becomes especially tricky when the player dies in the 
+				top left corner, where they spawn. (They enter an infinite death loop!) Really, the only
+				reliable way to play the game right now is to restart the client after death.
+				<br/><br/>
+				Nevertheless, I am quite pleased with the game. Though simple, my friends enjoyed playing it,
+				as did I. If I were to return to the project, I would love to publish it to the Play Store as
+				an app - I think it's a great game for mobile platforms!
+			</p>
+		</div>
+                <p class="project-category">Software</p>
+              </a>
+            </li>
+		
 	    <!-- BOBTAIL
 	    <li class="project-item  active" data-filter-item data-category="Non-technical">
               <a href="#">
