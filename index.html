@@ -191,9 +191,9 @@
             <button class="navbar-link" data-nav-link>Portfolio</button>
           </li>
 
-          <!--li class="navbar-item">
+          <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Blog</button>
-          </li-->
+          </li>
 
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Contact</button>
@@ -1964,13 +1964,32 @@
 				<img width="100%" src="./assets/images/bobtail-anna-painting.jpg" alt="Anna Painting a Squid" loading="lazy">
 				<img width="100%" src="./assets/images/bobtail-painted.jpg" alt="Anna Painting a Squid" loading="lazy">
 				<br/><br/>
+			
+				While painting was ongoing, I ordered the parts for the board. I specifically wanted to build the
+				board to be able to slide, so for wheels, I chose Abec 11 Flashback Amber Thane wheels, which are
+				known for being especially buttery smooth.
 
-				<i>To be continued...</i><br/>
-				This project is still in progress! Now that I've got the design painted, I need to put a protective
-				coat on it. Once I do this, I'll put the hardware on it, and test it!
 				<br/><br/>
 				<img width="100%" src="./assets/images/bobtail-hardware.jpg" alt="Longboard Hardware" loading="lazy">
 				<br/><br/>
+				
+				After letting the board dry, I applied a few layers of Clear Coat. At this point,
+				it was late August, which meant the temperature was still high enough in the evening
+				to be within the paint's specification.
+
+				<br/><br/>
+				<img width="100%" src="./assets/images/bobtail-clearcoat.jpg" alt="Clear Coat" loading="lazy">
+				<img width="100%" src="./assets/images/bobtail-clearcoat-painting.jpg" alt="Clear Coat Painting" loading="lazy">
+				<br/><br/>
+
+				After a few more days, the clearcoat had dried, and I prepared to apply the grip tape.
+			
+				<br/><br/>
+				<img width="100%" src="./assets/images/bobtail-clearcoat.jpg" alt="Clear Coat" loading="lazy">
+				<img width="100%" src="./assets/images/bobtail-clearcoat-painting.jpg" alt="Clear Coat Painting" loading="lazy">
+				<br/><br/>
+
+
 			</p>
 		</div>
 
@@ -2038,13 +2057,220 @@
         - #BLOG
       -->
 
-      <article class="blog"> <!--data-page="blog"-->
+      <article class="blog" data-page="blog">
 
         <header>
           <h2 class="h2 article-title">Blog</h2>
         </header>
+	
+	<ul class="project-list">
 
-        <section class="blog-posts">
+	    <!-- PANORAMA RIDGE SOLSTICE -->
+	    <li class="project-item  active"> <!--data-filter-item data-category="Mechanical"-->
+              <a href="#">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img height="100px" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+                </figure>
+              </a>
+                <h3 class="project-title" data-project-title>Panorama Ridge Solstice Summit</h3>
+
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>
+			<a class="project-subtitle" style="text-decoration: underline" target="_blank">22 June 2025</a></h4>
+		<div style="display:none" data-project-content>
+                  	<img width="100%" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Summary</h5>
+			<p>
+			Garibaldi's Panorama Ridge is about as classic as they come. Camping at Garibaldi lake with my father in the early 2010s was perhaps the first backcountry experience I ever had, and having summitted the Black Tusk some years ago, Panorama Ridge was the final corner of the "Garibaldi Trifecta" to reach. When my friend, Dane, suggested a trip to the lake, the opportunity couldn't have been more obvious.
+
+			We planned to summit the ridge by sunrise - just two days after the summer solstice. Call us masochists, but as our date approached, the weather window was too good to pass up.
+			</p>
+			<br/>
+			<h5 class="h5 modal-title">Trip Report</h5>
+			<p>
+			We left for Rubble Creek trailhead at a comfortable 9:15AM on Saturday.
+			</p>
+			<br/>
+
+			<p>
+			<i> Vibration Analysis </i><br/>
+			A standard requirement of space-rated sensors is the ability to withstand the vibration environment they will be exposed to during launch.
+			These vibration environments are quite extreme, and special care must be taken to identify and resolve any potential vibration-induced failure 
+			modes. I took responsibility for performing the random vibration analysis for the project.
+			<br/><br/>
+			I began by familiarizing myself with relevant theory for vibration analysis, such as interpreting Power Spectral Densities plots and using
+			Laplace transforms to compute stress responses in simple structures. Once I had familiarized myself with the theory, I created a MATLAB
+			script to calculate the vibration response of a simplified version of the sensor, iteratively adding complexity as I was able.
+			<br/><br/>
+			Once I had reached the peak complexity that could be analyzed by manual calculations, I moved on to random vibration simulation.
+			Using SOLIDWORKS, I first recreated the simplified sensor and performed a simulation, whose inputs matched those of the MATLAB script.
+			After corroborating results and determining I was performing the simulations correctly, I performed the simulation on the detailed
+			model of the sensor. Using the results of this analysis, I was able to determine the parameters most influencing the vibration response
+			of the sensor, and identified possible failure paths and modes to be resolved.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/capstone-stress.png" alt="Stress Analysis">
+			<br/>
+
+			<p>
+			<i> Testbench Design </i><br/>
+			One of the key requirements for the second was thermal and baric compensation, for which a second-order compensation scheme was needed.
+			Without compensation, the sensor would produce highly inaccurate readings near its operational limits, which is visualized below.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/capstone-response.png" alt="Output Response">
+			<br/>
+			<p>
+			To enable testing, I constructed a testbench which used a LabJack to collect data. I soldered thermocouple and pressure sensor connections
+			onto perfboards, and connected them to the LabJack. I also added strain reliefs and other mechanical features to the testbench, which prevented 
+			the lead-ends of the connections from being damaged. Once the testbench was constructed, we connected it to various points along a manifold and 
+			collected data at different temperature and pressure points; this data was used to produce a second-order fit for the compensator to use.
+
+			<br/><br/>
+			<img width="100%" src="assets/images/capstone-testbench.jpg" alt="Photo of Testbench">
+			<br/><br/>
+			Ultimately, the second-order compensation scheme was mostly succesful, bringing measurement error within project requirements. This could not
+			be validated at lower temperatures, due to formation of ice and a lack of time to resolve this issue.
+			</p>
+			<br/>
+
+			<p>
+			<i> Statistical Analysis </i><br/>
+			To evaluate the effectiveness of our solution compared to others, performing statistical analyses
+			was essential. One key analysis was the full-scale error of the solution. The analysis involved with
+			this task was left to me. I determined that two data were necessary to computing the error:
+			<br/>
+			1. The confidence interval for our sensors, based on the readings produced by a calibrated reference; and
+			<br/>
+			2. The prediction interval for the compensation model, based on the standard deviation of readings
+			<br/>
+			Distinguishing between the prediction and confidence intervals became central to understanding the
+			total error analysis. A key challenge with this was to convey the analysis intuitively. I used
+			several diagrams to attempt to do this, and with help from my teammates, determined how best
+			to explain the analysis to laypersons.
+			</p>
+			<br/>
+			<p>
+			Overall, this experience was extremely beneficial. It was a major contributor to my understanding of
+			statistical analysis, exposing me to use of essential tools such as standard deviation and confidence.
+			Using the analysis, we successfully characterized the reliability of our solution to accurately predict
+			temperature.
+			</p>
+			<br/>
+			<img width="100%" src="assets/images/capstone-envelope.png" alt="Output Error Envelope">
+			<br/>
+			
+			</div>
+                <p class="project-category">Trip Report</p>
+            </li>
+
+	    <!-- MOUNT BURWELL -->
+	    <li class="project-item  active"> <!--data-filter-item data-category="Mechanical"-->
+              <a href="#">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img height="100px" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+                </figure>
+              </a>
+                <h3 class="project-title" data-project-title>Mount Colliseum & Burwell</h3>
+
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>
+			<a class="project-subtitle" style="text-decoration: underline" target="_blank">22 June 2025</a></h4>
+		<div style="display:none" data-project-content>
+                  	<img width="100%" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Summary</h5>
+			<p>
+			Garibaldi's 
+			</div>
+                <p class="project-category">Trip Report</p>
+            </li>
+
+	    <!-- SKY PILOT -->
+	    <li class="project-item  active"> <!--data-filter-item data-category="Mechanical"-->
+              <a href="#">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img height="100px" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+                </figure>
+              </a>
+                <h3 class="project-title" data-project-title>Sky Pilot</h3>
+
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>
+			<a class="project-subtitle" style="text-decoration: underline" target="_blank">22 June 2025</a></h4>
+		<div style="display:none" data-project-content>
+                  	<img width="100%" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Summary</h5>
+			<p>
+			Garibaldi's 
+			</div>
+                <p class="project-category">Trip Report</p>
+            </li>
+
+	    <!-- HARVEY & BRUNSWICK -->
+	    <li class="project-item  active"> <!--data-filter-item data-category="Mechanical"-->
+              <a href="#">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img height="100px" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+                </figure>
+              </a>
+                <h3 class="project-title" data-project-title>Mt Harvey & Brunswick</h3>
+
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>
+			<a class="project-subtitle" style="text-decoration: underline" target="_blank">22 June 2025</a></h4>
+		<div style="display:none" data-project-content>
+                  	<img width="100%" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Summary</h5>
+			<p>
+			Garibaldi's 
+			</div>
+                <p class="project-category">Trip Report</p>
+            </li>
+
+
+
+	    <!-- BLACK TUSK -->
+	    <li class="project-item  active"> <!--data-filter-item data-category="Mechanical"-->
+              <a href="#">
+                <figure class="project-img">
+                  <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                  </div>
+
+                  <img height="100px" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+                </figure>
+              </a>
+                <h3 class="project-title" data-project-title>Black Tusk</h3>
+
+		<h4 style="display: none" class="project-subtitle" data-project-subtitle>
+			<a class="project-subtitle" style="text-decoration: underline" target="_blank">22 June 2025</a></h4>
+		<div style="display:none" data-project-content>
+                  	<img width="100%" src="./assets/images/capstone-sensor.png" alt="Lightly-Space-Rated Pressure Sensor" loading="lazy">
+			<br/>
+			<h5 class="h5 modal-title">Summary</h5>
+			<p>
+			Garibaldi's 
+			</div>
+                <p class="project-category">Trip Report</p>
+            </li>
+
+        <!--section class="blog-posts">
 
           <ul class="blog-posts-list">
 
@@ -2214,11 +2440,11 @@
                 </div>
 
               </a>
-            </li>
+            </li-->
 
           </ul>
 
-        </section>
+        </section-->
 
       </article>
 
